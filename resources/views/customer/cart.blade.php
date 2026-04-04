@@ -1,4 +1,4 @@
-@extends('customer.layouts.master')
+@extends('customer.layouts.app  ')
 
 @section('content')
     <!-- Single Page Header start -->
@@ -147,7 +147,7 @@
                 return;
             }
 
-            fetch("{{ route('cart.update') }}", {
+            fetch("{{ 'cart.update' }}", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

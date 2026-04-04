@@ -66,61 +66,61 @@ class MenuController extends Controller
         ]);
     }
 
-    // public function updateCart(Request $request)
-    // {
-    //     $itemId = $request->input('id');
-    //     $newQty = $request->input('qty');
+    public function updateCart(Request $request)
+    {
+        $itemId = $request->input('id');
+        $newQty = $request->input('qty');
 
-    //     if ($newQty <= 0) {
-    //         return response()->json(['success' => false]);
-    //     }
+        if ($newQty <= 0) {
+            return response()->json(['success' => false]);
+        }
 
-    //     $cart = Session::get('cart');
-    //     if (isset($cart[$itemId])) {
-    //         $cart[$itemId]['qty'] = $newQty;
-    //         Session::put('cart', $cart);
-    //         Session::flash('success', 'Jumlah item berhasil diperbarui');
+        $cart = Session::get('cart');
+        if (isset($cart[$itemId])) {
+            $cart[$itemId]['qty'] = $newQty;
+            Session::put('cart', $cart);
+            Session::flash('success', 'Jumlah item berhasil diperbarui');
 
-    //         return response()->json(['success' => true]);
-    //     }
+            return response()->json(['success' => true]);
+        }
 
-    //     return response()->json(['success' => false]);
-    // }
+        return response()->json(['success' => false]);
+    }
 
-    // public function removeCart(Request $request)
-    // {
-    //     $itemId = $request->input('id');
+    public function removeCart(Request $request)
+    {
+        $itemId = $request->input('id');
 
-    //     $cart = Session::get('cart');
+        $cart = Session::get('cart');
 
-    //     if (isset($cart[$itemId])) {
-    //         unset($cart[$itemId]);
-    //         Session::put('cart', $cart);
+        if (isset($cart[$itemId])) {
+            unset($cart[$itemId]);
+            Session::put('cart', $cart);
 
-    //         Session::flash('success', 'Item berhasil dihapus dari keranjang');
+            Session::flash('success', 'Item berhasil dihapus dari keranjang');
 
-    //         return response()->json(['success' => true]);
-    //     }
-    // }
+            return response()->json(['success' => true]);
+        }
+    }
 
-    // public function clearCart()
-    // {
-    //     Session::forget('cart');
-    //     return redirect()->route('cart')->with('success', 'Keranjang berhasil dikosongkan');
-    // }
+    public function clearCart()
+    {
+        Session::forget('cart');
+        return redirect()->route('cart')->with('success', 'Keranjang berhasil dikosongkan');
+    }
 
-    // // Checkout
-    // public function checkout()
-    // {
-    //     $cart = Session::get('cart');
-    //     if (empty($cart)) {
-    //         return redirect()->route('cart')->with('error', 'Keranjang masih kosong');
-    //     }
+    // Checkout
+    public function checkout()
+    {
+        $cart = Session::get('cart');
+        if (empty($cart)) {
+            return redirect()->route('cart')->with('error', 'Keranjang masih kosong');
+        }
 
-    //     $tableNumber = Session::get('tableNumber');
+        $tableNumber = Session::get('tableNumber');
 
-    //     return view('customer.checkout', compact('cart', 'tableNumber'));
-    // }
+        return view('customer.checkout', compact('cart', 'tableNumber'));
+    }
 
     // public function storeOrder(Request $request)
     // {
