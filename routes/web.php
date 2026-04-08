@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +31,5 @@ Route::prefix('dashboard')->group(function () {
     Route::resource('items', ItemController::class);
     Route::post('items/update-status/{order}', [ItemController::class, 'updateStatus'])->name('items.updateStatus');
     Route::resource('orders', OrderController::class);
+    Route::resource('roles', RoleController::class);
 });
