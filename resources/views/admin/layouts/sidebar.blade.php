@@ -48,7 +48,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                {{-- 
+
                 <li class="sidebar-item {{ request()->routeIs('orders.*') ? 'active' : '' }}">
                     <a href="{{ route('orders.index') }}" class='sidebar-link'>
                         <i class="bi bi-cart-fill"></i>
@@ -61,7 +61,7 @@
                         <i class="bi bi-file-earmark-text-fill"></i>
                         <span>Daftar Menu</span>
                     </a>
-                </li> --}}
+                </li>
 
                 {{-- @if (Auth::user()->role->role_name == 'admin')
                     <li class="sidebar-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
