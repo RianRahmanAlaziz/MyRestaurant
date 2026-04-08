@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -32,7 +32,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'cat_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
+        // Create a new category
+        Category::create($request->all());
+
+        // Redirect to the categories index with a success message
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     /**
@@ -46,24 +55,43 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(string $id)
     {
-        //
+        // Fetch the category by ID
+        $category = Category::findOrFail($id);
+
+        // Return the view to edit the category
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'cat_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+
+        // Find the category by ID and update it
+        $category = Category::findOrFail($id);
+        $category->update($request->all());
+
+        // Redirect to the categories index with a success message
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(string $id)
     {
-        //
+        // Find the category by ID and delete it
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        // Redirect to the categories index with a success message
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }
